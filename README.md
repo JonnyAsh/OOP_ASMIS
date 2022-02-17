@@ -36,8 +36,8 @@ def _encrypt_pw(self, password):
 ## 3. Patient’s username and password database
 This task uses a standard text file for storing patient’s username and hashing password for simplicity (see Figure 2), whereas in real-life environment such data would be stored on a database server. To better reflect a real-life scenario, I set up a Mysql server on my Raspberry Pi (see Figure 3). The Queens Medical Centre (queens_mc) database shows a sample of an unhashed  patient registration table consisting of name, password, NHS number, and doctor(specialist).
 
-> joe bloggs , vb123456
-Figure 2. A sample of the  patient’s raw data in a text file.
+> joe bloggs , vb123456 
+#### Figure 2. A sample of the  patient’s raw data in a text file.
 
 
 
