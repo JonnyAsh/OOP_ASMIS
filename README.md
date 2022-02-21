@@ -2,26 +2,28 @@
 ## 1.1 Aims and objectives
 The aim of this Python project is to use Object-Orientated Programming in mitigating a security issue for an appointment and scheduling management system (ASMIS) of Queens Medical Centre. The ASMIS is a cloud-based software as a service (Saas) and can be access through mobile and desktop devices. The ASMIS contains basic information related to patient’s registration details, appointments and preferred medical specialist as well as the medical clinic’s administrative staff who maintain the availability and scheduling of the medical specialists. Although the patient’s and clinic’s core information and records are isolated from AMSIS, threat actors can obtain user's Personal Identifiable Information (PII).
 
-## 1.2 Threats and attacks
-The main threat to the ASMIS is to use HTTPS spoofing and IDN homograph attacks to fake the ASMIS landing page with a login portal that can harvest user’s credentials. To mitigate these threats, Phillips (2018) advises to implement two classes for a web login portal which will help validate the password and username combination:
+## 1.2 Threats
+The main threats to the ASMIS are to use HTTPS spoofing and IDN homograph attacks to fake the ASMIS landing page with a login portal that can harvest user’s credentials as well as brute force attacks on the password Login to gain access. To mitigate these threats, Phillips (2018) advises to implement two classes for web login which will help validate the password and username combination.
 
 1. Authenticator class: ensuring the user is who they say they really are.
 2. Authorizer class: ensuring the authenticated user has correct access to certain functions.
 
+However, this programme will focus on authentication as it only relates to registering and logging in of patient’s username and password.
+
+
 ## 3. Passwords and hashing
 When dealing with passwords, there are various elements that need to be considered such as password complexity, length, history, expiration date, and encryption. The authenticator class looks at password encryption, password length and complexity.
-The below code shows if a user inputs a password of less than eight characters it will be rejected, and it must include a combination of letters and numbers. For example, ‘g1234’ would be rejected, whereas ‘ab4521421’ would be accepted. 
 
-```html
-def add_user(self, username, password):
-        if username in self.users:
-            raise Username_already_exists(username)
-        if len(password) < 8:                            # length can be modified to shorter or longer
-            raise Password_too_Short(username)
-        if not any(char.isdigit() for char in password): # enforces alpha-numeric password: g12345678
-            raise Password_needs_a_number(username)
-        self.users[username] = username(username, password)
-```
+* If len(password) < 5	= 			password must be six or more characters
+* If not any(char.isdigit()	 = 		password must have at least one numeral
+* If not any(char.isupper()	 =		password must have one uppercase letter
+* If not any(char.islower()	 =		password must have one lowercase letter
+
+
+The below examples shows if a user inputs a password of less than five characters it will be rejected, and it must include an alpha-numeric password with a lower and upper letter. For example, ‘g1234’ would be rejected, whereas ‘Ab4521421’ would be accepted. 
+
+![rejected accept](https://github.com/JonnyAsh/OOP_ASMIS/blob/67a55d35199aa14fb51effb24afb3b8f9a1e01c9/images/accept%20reject.png)
+
 Once a user signs up with a username and password, it is stored in the patient’s text file. Here it is stored in string text which can be easily read if accessed by a threat actor. To improve the security and confidentiality of the patient’s PII, the user class uses the imported Hashlib library to encode the password string. The Hashlib takes the user’s password and hashes it using sha256 constructor which results in a hash value.
 
 ```html
