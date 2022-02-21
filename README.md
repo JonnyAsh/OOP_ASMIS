@@ -194,29 +194,29 @@ Login()
 ## 6. Testing
 This section focuses on testing of the programme and any errors that occur.
 
+<br></p>
 ![1](https://github.com/JonnyAsh/OOP_ASMIS/blob/e0ac13e6ebfe19140a36726e5f1d4dbd1513cb65/images/1.png)
-In this example, the user has inputted a four-digit numeric password and programme has flagged invalid permissions of length, uppercase letters, and lowercase letters.
+In this example, the user has inputted a four-digit numeric password and programme has flagged invalid permissions of length, uppercase letters, and lowercase letters.<br></p>
 
+<br></p>
+![2](https://github.com/JonnyAsh/OOP_ASMIS/blob/e0ac13e6ebfe19140a36726e5f1d4dbd1513cb65/images/2.png) 
+In this example, the user has inputted the appropriate text that meets the password validations, and the programme accepts the username and password.<br></p>
 
-![2](https://github.com/JonnyAsh/OOP_ASMIS/blob/e0ac13e6ebfe19140a36726e5f1d4dbd1513cb65/images/2.png)
-In this example, the user has inputted the appropriate text that meets the password validations, and the programme accepts the username and password.
-
-
+<br></p>
 ![3](https://github.com/JonnyAsh/OOP_ASMIS/blob/e0ac13e6ebfe19140a36726e5f1d4dbd1513cb65/images/3.png)
-The user’s username and password are entered in Patients_database file, and the password is hashed.
+The user’s username and password are entered in Patients_database file, and the password is hashed.<br></p>
 
-
+<br></p>
 ![4](https://github.com/JonnyAsh/OOP_ASMIS/blob/e0ac13e6ebfe19140a36726e5f1d4dbd1513cb65/images/4.png)
-This example shows if the user attempts to register a second time with same credentials. The programme rejects the credentials with an ‘You are already registered’ statement which routes the user to the landing page.
+This example shows if the user attempts to register a second time with same credentials. The programme rejects the credentials with an ‘You are already registered’ statement which routes the user to the landing page.<br></p>
 
-
-
+<br></p>
 ![5](https://github.com/JonnyAsh/OOP_ASMIS/blob/e0ac13e6ebfe19140a36726e5f1d4dbd1513cb65/images/5.png)
-This example shows if the same user logs in with registered credentials. The programme accepts the credentials and returns a ‘ You are now logged in’ statement.
+This example shows if the same user logs in with registered credentials. The programme accepts the credentials and returns a ‘ You are now logged in’ statement.<br></p>
 
-
+<br></p>
 ![6](https://github.com/JonnyAsh/OOP_ASMIS/blob/e0ac13e6ebfe19140a36726e5f1d4dbd1513cb65/images/6.png)
-The user has inputted an incorrect password consequently the programme rejects the credentials with a ‘Sorry, your credentials are incorrect’ statement and restarts the login process after a three second delay.
+The user has inputted an incorrect password consequently the programme rejects the credentials with a ‘Sorry, your credentials are incorrect’ statement and restarts the login process after a three second delay.<br></p>
 
 
 
