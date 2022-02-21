@@ -1,3 +1,4 @@
+
 # 1. Background
 ## 1.1 Aims and objectives
 The aim of this Python project is to use Object-Orientated Programming in mitigating a security issue for an appointment and scheduling management system (ASMIS) of Queens Medical Centre. The ASMIS is a cloud-based software as a service (Saas) and can be access through mobile and desktop devices. The ASMIS contains basic information related to patient’s registration details, appointments and preferred medical specialist as well as the medical clinic’s administrative staff who maintain the availability and scheduling of the medical specialists. Although the patient’s and clinic’s core information and records are isolated from AMSIS, threat actors can obtain user's Personal Identifiable Information (PII).
@@ -24,7 +25,7 @@ The below examples shows if a user inputs a password of less than five character
 
 ![rejected accept](https://github.com/JonnyAsh/OOP_ASMIS/blob/67a55d35199aa14fb51effb24afb3b8f9a1e01c9/images/accept%20reject.png)
 
-Once a user signs up with a username and password, it is stored in the patient’s text file. Here it is stored in string text which can be easily read if accessed by a threat actor. To improve the security and confidentiality of the patient’s PII, the user class uses the imported Hashlib library to encode the password string. The Hashlib takes the user’s password and hashes it using sha256 constructor which results in a hash value.
+Once a user signs up with a username and password, it is stored in the patient’s text file. Here, it is stored in string text which can be easily read if accessed by a threat actor. To improve the security and confidentiality of the patient’s PII, the user class uses the imported Hashlib library to encode the password string. The Hashlib takes the user’s password and hashes it using sha256 constructor which results in a hash value.
 
 ```html
 hashedpassword = hashlib.sha256(Password.encode()).hexdigest()
@@ -64,31 +65,234 @@ This programme is using two dependencies:
 2.	Time from https://docs.python.org/3/library/time.html
 
 ## 5. Authentication module
-5.1 Welcome
+###5.1 Welcome
 This Welcome function was adapted from Archibald (2021) and commences the programme.
+
 ```html
 def Welcome():
 # This function displays a landing page welcoming users to Queens Medical Centre and gives guidance on next steps to be taken.
 print("Welcome to Queens Medical Centre")
 print("Please choose one of the following to access the appointment and scheduling system")
+
+
+# User selects which option they prefer.
+print("Select 1 to Register")
+print("Select 2 to Login")
 print()
+
 # As this is simple 1/0 logic operator, the Boolean returns the value True.
 while True:
-print()
+    print()
 user = input(" Input your selection here: ")
 if user in ['1', '2']:
-break 
+    break 
 if user == '1':
-Register()
+    Register()
 else:
+    Login()
+```
+
+### 5.2 Registration
+This section gives comments for the register function.
+```
+
+def Register():
+print("Welcome to Queens Medical centre registration portal")
+
+# User inputs name and password if first time using system.
+Username = input("Please input your name: ")
+Password = input("Please input your password: ")
+
+# Starts the hash dependency for password hashing
+hashedpassword =hashlib.sha256(Password.encode()).hexdigest()print("Password:" + Password)
+
+
+# Sets conditions for password validation. If conditions are not met, then user is routed back to landing page.
+# Password must be five or more characters.
+if len(Password) < 5:
+    print('length should be at least 5')
+    val = False   
+
+# Password must have at least one numeral.
+if not any(char.isdigit() for char in Password):
+    print('Password should have at least one numeral')
+    val = False
+
+# Password must have one uppercase letter.
+if not any(char.isupper() for char in Password):print('Password should have at least one uppercase letter')
+    val = False
+
+# Password must have one uppercase letter.
+if not any(char.islower() for char in Password):
+    print('Password should have at least one lowercase letter')
+    val = False
+
+# This function opens the text file to add new users’ username and hashed password.
+file = open(“Patient_database.txt", "r")
+
+# This function compares users’ username and password against the registered users’ credentials. If already registered, output will state ‘You are already registered’.
+for f in file:
+    if Username in f:
+    print("You are already registered")
+    Welcome()
+
+# If the user is already registered then they will be returned to the landing page to restart process.
+    Return
+
+def Register():
+print("Welcome to Queens Medical centre registration portal")
+
+# User inputs name and password if first time using system.
+Username = input("Please input your name: ")
+Password = input("Please input your password: ")
+
+# Starts the hash dependency for password hashing
+hashedpassword =hashlib.sha256(Password.encode()).hexdigest()print("Password:" + Password)
+
+
+# Sets conditions for password validation. If conditions are not met, then user is routed back to landing page.
+# Password must be five or more characters.
+if len(Password) < 5:
+print('length should be at least 5')
+val = False   
+
+# Password must have at least one numeral.
+if not any(char.isdigit() for char in Password):
+print('Password should have at least one numeral')
+val = False
+
+# Password must have one uppercase letter.
+if not any(char.isupper() for char in Password):print('Password should have at least one uppercase letter')
+val = False
+
+# Password must have one uppercase letter.
+if not any(char.islower() for char in Password):
+print('Password should have at least one lowercase letter')
+val = False
+
+# This function opens the text file to add new users’ username and hashed password.
+file = open(“Patient_database.txt", "r")
+
+# This function compares users’ username and password against the registered users’ credentials. If already registered, output will state ‘You are already registered’.
+for f in file:
+if Username in f:
+print("You are already registered")
+Welcome()
+
+# If the user is already registered then they will be returned to the landing page to restart process.
+Return
+file.close()
+file = open("Patient_database.txt", "a")
+file.write(Username + "," + hashedpassword)file.write(",")
+file.write(hashedpassword)file.write("\n")
+
+# If newly registered and no exceptions raised, then output will state ‘Your details have been entered’.
+file.close()print("Your details have been entered")
+Welcome()
+
+def Register():
+print("Welcome to Queens Medical centre registration portal")
+
+# User inputs name and password if first time using system.
+Username = input("Please input your name: ")
+Password = input("Please input your password: ")
+
+# Starts the hash dependency for password hashing
+hashedpassword =hashlib.sha256(Password.encode()).hexdigest()print("Password:" + Password)
+
+# Sets conditions for password validation. If conditions are not met, then user is routed back to landing page.
+# Password must be five or more characters.
+if len(Password) < 5:
+    print('length should be at least 5')
+    val = False   
+
+# Password must have at least one numeral.
+if not any(char.isdigit() for char in Password):
+    print('Password should have at least one numeral')
+    val = False
+
+# Password must have one uppercase letter.
+if not any(char.isupper() for char in Password):print('Password should have at least one uppercase letter')
+val = False
+
+# Password must have one uppercase letter.
+if not any(char.islower() for char in Password):
+print('Password should have at least one lowercase letter')
+val = False
+
+# This function opens the text file to add new users’ username and hashed password.
+file = open(“Patient_database.txt", "r")
+
+# This function compares users’ username and password against the registered users’ credentials. If already registered, output will state ‘You are already registered’.
+for f in file:
+if Username in f:
+print("You are already registered")
+Welcome()
+
+# If the user is already registered then they will be returned to the landing page to restart process.
+Return
+file.close()
+file = open("Patient_database.txt", "a")
+file.write(Username + "," + hashedpassword)file.write(",")
+file.write(hashedpassword)file.write("\n")
+# If newly registered and no exceptions raised, then output will state ‘Your details have been entered’.
+file.close()print("Your details have been entered")
+Welcome()
+
+# password is hashed to file
+file.close()
+file = open("Patient_database.txt", "a")
+file.write(Username + "," + hashedpassword)file.write(",")
+file.write(hashedpassword)file.write("\n")
+
+# If newly registered and no exceptions raised, then output will state ‘Your details have been entered’.
+file.close()
+print("Your details have been entered")
+Welcome()
+```
+
+## 5.3 Login
+This section gives comments for the Login function.
+```
+def Login():
+
+# Welcome message asking for users’ name and password.
+print("Welcome to Queens Medical centre login portal")
+Username = input("Please input your name: ")
+Password = input("Please input your password:")
+
+# Starts the hash dependency for password decrypting.
+hashedpassword =hashlib.sha256(Password.encode()).hexdigest()print("Password:" + Password)
+
+# This function opens the text file and compares against the registered users’ credentials.
+with open ("Patient_database.txt", "r") as file:
+    for line in file:line = 
+    line.strip().split()
+if line[0] == Username and line[1] == hashedpassword:
+
+
+# If the users’ username and password are already registered, then output will state ‘You are now logged in’.
+    print(" You are now logged in")
+    return True
+
+# If there is an input error or the user has not been previously registered, then output will state ‘Sorry, your credentials are incorrect’.
+print("Sorry, your credentials are incorrect")
+
+# This time dependency has a three second duration before user can take the next step.
+time.sleep(3)
+
+# This returns the user to the landing page to restart the process.
+return 
+False
+Welcome()
+Register()
 Login()
+
 
 ```
 
-##
-####
 
-##
+
 ## References
 * Docs.python.org. (2022) Hashlib — Secure hashes and message digests — Python 3.8.4rc1 documentation. Available from: https://docs.python.org/3/library/hashlib.html [Accessed 14 Feb. 2022].
 * Fromaget, P. (2022) How to Learn to Program in Python with a Raspberry Pi? Raspberry tips. Available from: https://raspberrytips.com/python-tutorial-raspberry-pi/ [Accessed 22 Jan. 2022].
