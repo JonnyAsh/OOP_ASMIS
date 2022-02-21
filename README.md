@@ -65,7 +65,7 @@ This programme is using two dependencies:
 2.	Time from https://docs.python.org/3/library/time.html
 
 ## 5. Authentication module
-###5.1 Welcome
+### 5.1 Welcome
 This Welcome function was adapted from Archibald (2021) and commences the programme.
 
 ```html
@@ -95,7 +95,6 @@ else:
 ### 5.2 Registration
 This section gives comments for the register function.
 ```
-
 def Register():
 print("Welcome to Queens Medical centre registration portal")
 
@@ -119,7 +118,8 @@ if not any(char.isdigit() for char in Password):
     val = False
 
 # Password must have one uppercase letter.
-if not any(char.isupper() for char in Password):print('Password should have at least one uppercase letter')
+if not any(char.isupper() for char in Password):
+    print('Password should have at least one uppercase letter')
     val = False
 
 # Password must have one uppercase letter.
@@ -133,121 +133,23 @@ file = open(“Patient_database.txt", "r")
 # This function compares users’ username and password against the registered users’ credentials. If already registered, output will state ‘You are already registered’.
 for f in file:
     if Username in f:
-    print("You are already registered")
-    Welcome()
+        print("You are already registered")
+
+        Welcome()
 
 # If the user is already registered then they will be returned to the landing page to restart process.
-    Return
-
-def Register():
-print("Welcome to Queens Medical centre registration portal")
-
-# User inputs name and password if first time using system.
-Username = input("Please input your name: ")
-Password = input("Please input your password: ")
-
-# Starts the hash dependency for password hashing
-hashedpassword =hashlib.sha256(Password.encode()).hexdigest()print("Password:" + Password)
-
-
-# Sets conditions for password validation. If conditions are not met, then user is routed back to landing page.
-# Password must be five or more characters.
-if len(Password) < 5:
-print('length should be at least 5')
-val = False   
-
-# Password must have at least one numeral.
-if not any(char.isdigit() for char in Password):
-print('Password should have at least one numeral')
-val = False
-
-# Password must have one uppercase letter.
-if not any(char.isupper() for char in Password):print('Password should have at least one uppercase letter')
-val = False
-
-# Password must have one uppercase letter.
-if not any(char.islower() for char in Password):
-print('Password should have at least one lowercase letter')
-val = False
-
-# This function opens the text file to add new users’ username and hashed password.
-file = open(“Patient_database.txt", "r")
-
-# This function compares users’ username and password against the registered users’ credentials. If already registered, output will state ‘You are already registered’.
-for f in file:
-if Username in f:
-print("You are already registered")
-Welcome()
-
-# If the user is already registered then they will be returned to the landing page to restart process.
-Return
+        Return
+        
+# Password is hashed to file.       
 file.close()
 file = open("Patient_database.txt", "a")
 file.write(Username + "," + hashedpassword)file.write(",")
 file.write(hashedpassword)file.write("\n")
+file.close()
 
 # If newly registered and no exceptions raised, then output will state ‘Your details have been entered’.
-file.close()print("Your details have been entered")
-Welcome()
-
-def Register():
-print("Welcome to Queens Medical centre registration portal")
-
-# User inputs name and password if first time using system.
-Username = input("Please input your name: ")
-Password = input("Please input your password: ")
-
-# Starts the hash dependency for password hashing
-hashedpassword =hashlib.sha256(Password.encode()).hexdigest()print("Password:" + Password)
-
-# Sets conditions for password validation. If conditions are not met, then user is routed back to landing page.
-# Password must be five or more characters.
-if len(Password) < 5:
-    print('length should be at least 5')
-    val = False   
-
-# Password must have at least one numeral.
-if not any(char.isdigit() for char in Password):
-    print('Password should have at least one numeral')
-    val = False
-
-# Password must have one uppercase letter.
-if not any(char.isupper() for char in Password):print('Password should have at least one uppercase letter')
-val = False
-
-# Password must have one uppercase letter.
-if not any(char.islower() for char in Password):
-print('Password should have at least one lowercase letter')
-val = False
-
-# This function opens the text file to add new users’ username and hashed password.
-file = open(“Patient_database.txt", "r")
-
-# This function compares users’ username and password against the registered users’ credentials. If already registered, output will state ‘You are already registered’.
-for f in file:
-if Username in f:
-print("You are already registered")
-Welcome()
-
-# If the user is already registered then they will be returned to the landing page to restart process.
-Return
-file.close()
-file = open("Patient_database.txt", "a")
-file.write(Username + "," + hashedpassword)file.write(",")
-file.write(hashedpassword)file.write("\n")
-# If newly registered and no exceptions raised, then output will state ‘Your details have been entered’.
-file.close()print("Your details have been entered")
-Welcome()
-
-# password is hashed to file
-file.close()
-file = open("Patient_database.txt", "a")
-file.write(Username + "," + hashedpassword)file.write(",")
-file.write(hashedpassword)file.write("\n")
-
-# If newly registered and no exceptions raised, then output will state ‘Your details have been entered’.
-file.close()
 print("Your details have been entered")
+
 Welcome()
 ```
 
@@ -270,7 +172,6 @@ with open ("Patient_database.txt", "r") as file:
     line.strip().split()
 if line[0] == Username and line[1] == hashedpassword:
 
-
 # If the users’ username and password are already registered, then output will state ‘You are now logged in’.
     print(" You are now logged in")
     return True
@@ -284,18 +185,35 @@ time.sleep(3)
 # This returns the user to the landing page to restart the process.
 return 
 False
+
 Welcome()
 Register()
 Login()
-
-
 ```
 
+## 6. Testing
+This section focuses on testing of the programme and any errors that occur.
+
+In this example, the user has inputted a four-digit numeric password and programme has flagged invalid permissions of length, uppercase letters, and lowercase letters.
+
+In this example, the user has inputted the appropriate text that meets the password validations, and the programme accepts the username and password.
+
+The user’s username and password are entered in Patients_database file, and the password is hashed.
+
+This example shows if the user attempts to register a second time with same credentials. The programme rejects the credentials with an ‘You are already registered’ statement which routes the user to the landing page.
+
+This example shows if the same user logs in with registered credentials. The programme accepts the credentials and returns a ‘ You are now logged in’ statement.
+
+The user has inputted an incorrect password consequently the programme rejects the credentials with a ‘Sorry, your credentials are incorrect’ statement and restarts the login process after a three second delay.
 
 
-## References
-* Docs.python.org. (2022) Hashlib — Secure hashes and message digests — Python 3.8.4rc1 documentation. Available from: https://docs.python.org/3/library/hashlib.html [Accessed 14 Feb. 2022].
+
+## 7. References
+
+* Archibald, J. (2021) Skyjaheim2/Login-System. GitHub. Available from: https://github.com/Skyjaheim2/Login-System/blob/master/login.py [Accessed 17 Feb. 2022].
+Docs.python.org. (2022) Hashlib — Secure hashes and message digests — Python 3.8.4rc1 documentation. Available from: https://docs.python.org/3/library/hashlib.html [Accessed 14 Feb. 2022].
 * Fromaget, P. (2022) How to Learn to Program in Python with a Raspberry Pi? Raspberry tips. Available from: https://raspberrytips.com/python-tutorial-raspberry-pi/ [Accessed 22 Jan. 2022].
-* GeeksforGeeks (2019). Password validation in Python - GeeksforGeeks. Available from: https://www.geeksforgeeks.org/password-validation-in-python/ [Accessed 9 Feb. 2022].
+* GeeksforGeeks (2019) Password validation in Python - GeeksforGeeks. Available from: https://www.geeksforgeeks.org/password-validation-in-python/ [Accessed 9 Feb. 2022].
+* Phillips, D. (2018) Python 3 object-oriented programming: build robust and maintainable software with object-oriented design patterns in Python 3.8. Birmingham, UK: Packt Publishing.
+* Python.org. (2000) time — Time access and conversions — Python 3.7.2 documentation. Available from: https://docs.python.org/3/library/time.html [Accessed 15 Feb. 2022].
 * Python, R. (2022) Object-Oriented Programming (OOP) in Python 3 – Real Python. realpython.com. Available from: https://realpython.com/python3-object-oriented-programming/ [Accessed 8 Feb. 2022].
-
