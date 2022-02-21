@@ -27,13 +27,25 @@ The below examples shows if a user inputs a password of less than five character
 Once a user signs up with a username and password, it is stored in the patient’s text file. Here it is stored in string text which can be easily read if accessed by a threat actor. To improve the security and confidentiality of the patient’s PII, the user class uses the imported Hashlib library to encode the password string. The Hashlib takes the user’s password and hashes it using sha256 constructor which results in a hash value.
 
 ```html
-def _encrypt_pw(self, password):
-        hash_string = self.username + password
-        hash_string = hash_string.encode("utf8")
-        return hashlib.sha256(hash_string) .hexdigest()
+hashedpassword = hashlib.sha256(Password.encode()).hexdigest()
 
+file.write(Username + "," + hashedpassword)
+    file.write(",")
+    file.write(hashedpassword)
 
 ```
+For example, a password would be hashed into the following value:
+```html
+Input: Jonny123
+Output: c4b151277ecbb605282699f245ddb75ab0f7f8fa45f38f2255e92219d08d90e9
+```
+
+Another useful feature to mitigate against brute force attacks is the time-related imported dependency ‘time’. This is used in the Login function to after a user has incorrectly inputted the password. It can be set to a different duration depending on the threat level. The time setting for this function is 3 seconds. It is worth noting that a longer setting may deter threat actors but also patients!
+
+```html
+time.sleep(3)
+```
+
 
 ## 3. Patient’s username and password database
 This task uses a standard text file for storing patient’s username and hashing password for simplicity (see Figure 2), whereas in real-life environment such data would be stored on a database server. To better reflect a real-life scenario, I set up a Mysql server on my Raspberry Pi (see Figure 3). The Queens Medical Centre (queens_mc) database shows a sample of an unhashed  patient registration table consisting of name, password, NHS number, and doctor(specialist).
@@ -46,7 +58,36 @@ This task uses a standard text file for storing patient’s username and hashing
 
 
 
+## 4. Dependencies
+This programme is using two dependencies:
+1.	Hashlib from https://docs.python.org/3/library/hashlib.html
+2.	Time from https://docs.python.org/3/library/time.html
+
+## 5. Authentication module
+5.1 Welcome
+This Welcome function was adapted from Archibald (2021) and commences the programme.
+```html
+def Welcome():
+# This function displays a landing page welcoming users to Queens Medical Centre and gives guidance on next steps to be taken.
+print("Welcome to Queens Medical Centre")
+print("Please choose one of the following to access the appointment and scheduling system")
+print()
+# As this is simple 1/0 logic operator, the Boolean returns the value True.
+while True:
+print()
+user = input(" Input your selection here: ")
+if user in ['1', '2']:
+break 
+if user == '1':
+Register()
+else:
+Login()
+
+```
+
 ##
+####
+
 ##
 ## References
 * Docs.python.org. (2022) Hashlib — Secure hashes and message digests — Python 3.8.4rc1 documentation. Available from: https://docs.python.org/3/library/hashlib.html [Accessed 14 Feb. 2022].
